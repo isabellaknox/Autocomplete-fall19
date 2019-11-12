@@ -121,7 +121,7 @@ public class BinarySearchAutocomplete implements Autocompletor {
 				continue;
 			if (pq.size() < k) {
 				pq.add(myTerms[i]);
-			} else if (pq.peek().getWeight() < t.getWeight()) {
+			} else if (pq.peek().getWeight() < myTerms[i].getWeight()) {
 				pq.remove();
 				pq.add(myTerms[i]);
 			}
