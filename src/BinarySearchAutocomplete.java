@@ -28,7 +28,7 @@ public class BinarySearchAutocomplete implements Autocompletor {
 	 *            weight[i].
 	 * @return a BinarySearchAutocomplete whose myTerms object has myTerms[i] =
 	 *         a Term with word terms[i] and weight weights[i].
-	 * @throws a
+	 * @throws
 	 *             NullPointerException if either argument passed in is null
 	 */
 	public BinarySearchAutocomplete(String[] terms, double[] weights) {
@@ -116,14 +116,14 @@ public class BinarySearchAutocomplete implements Autocompletor {
 		// maintain pq of size k
 		PriorityQueue<Term> pq =
 				new PriorityQueue<Term>(Comparator.comparing(Term::getWeight));
-		for (Term t : myTerms) {
-			if (!t.getWord().startsWith(prefix))
+		for (int i = first; i <= last; i++ ) {
+			if (!myTerms[i].getWord().startsWith(prefix))
 				continue;
 			if (pq.size() < k) {
-				pq.add(t);
+				pq.add(myTerms[i]);
 			} else if (pq.peek().getWeight() < t.getWeight()) {
 				pq.remove();
-				pq.add(t);
+				pq.add(myTerms[i]);
 			}
 		}
 		int numResults = Math.min(k, pq.size());
