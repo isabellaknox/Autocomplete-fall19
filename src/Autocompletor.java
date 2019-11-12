@@ -30,7 +30,7 @@ public interface Autocompletor {
      * @param weights is corresponding weight for word in terms
      * @return
      */
-	public int initialize(String[] terms, double[] weights);
+	public void initialize(String[] terms, double[] weights);
 	
 	/**
 	 * Return size in bytes of all Strings and doubles

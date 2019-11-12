@@ -137,7 +137,7 @@ public class BinarySearchAutocomplete implements Autocompletor {
 	}
 
 	@Override
-	public int initialize(String[] terms, double[] weights) {
+	public void initialize(String[] terms, double[] weights) {
 		myTerms = new Term[terms.length];
 		
 		for (int i = 0; i < terms.length; i++) {
@@ -145,7 +145,6 @@ public class BinarySearchAutocomplete implements Autocompletor {
 		}
 		
 		Arrays.sort(myTerms);
-		return 0;
 	}
 	
 	@Override
