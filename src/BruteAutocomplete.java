@@ -58,7 +58,7 @@ public class BruteAutocomplete implements Autocompletor {
 	}
 
 	@Override
-	public void initialize(String[] terms, double[] weights) {
+	public int initialize(String[] terms, double[] weights) {
 		myTerms = new Term[terms.length];
 
 		HashSet<String> words = new HashSet<>();
@@ -73,6 +73,7 @@ public class BruteAutocomplete implements Autocompletor {
 		if (words.size() != terms.length) {
 			throw new IllegalArgumentException("Duplicate input terms");
 		}
+		return 0;
 	}
 	
 	@Override

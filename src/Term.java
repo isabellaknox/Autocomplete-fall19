@@ -30,6 +30,16 @@ public class Term implements Comparable<Term> {
 	 */
 	public Term(String word, double weight) {
 		// TODO: Complete Term constructor, throw exceptions
+		// initialize  instance variables
+		myWord = word;
+		myWeight = weight;
+		// throw exceptions
+		if (word == null) {
+			throw new NullPointerException("Word is null");
+		}
+		if (weight < 0){
+		throw new IllegalArgumentException("negative weight " + weight);}
+
 	}
 	
 	/**
@@ -54,8 +64,7 @@ public class Term implements Comparable<Term> {
 	 * @return this Term's weight
 	 */
 	public double getWeight() {
-		// TODO: Change implementation
-		return 0;
+		return myWeight;
 	}
 
 	/**
@@ -99,10 +108,35 @@ public class Term implements Comparable<Term> {
 		 * @param v/w
 		 *            - Two Terms whose words are being compared
 		 */
+
 		public int compare(Term v, Term w) {
-			// TODO: Implement compare
-			return 0;
+			//Examines only as many characters as needed to return value
+			String vshort = "";
+			String wshort = "";
+
+			for (int i = 0; i < myPrefixSize; i++) {
+				// stops adding letters from w word if w word is shorter selected prefix size
+				if (i > w.getWord().length()-1 ){
+					break;
+				}
+				// adds character to String to make prefix from w word that will be compared
+				wshort += w.getWord().charAt(i);
+			}
+
+			for (int i = 0; i < myPrefixSize; i++) {
+				// stops adding letters from v word if v word is shorter selected prefix size
+				if (i > v.getWord().length()-1){
+					break;
+				}
+				// adds character to String to make prefix from v word that will be compared
+				vshort += v.getWord().charAt(i);
+			}
+			// compares prefix Strings that are only as long as needed from w word and v word
+			return vshort.compareTo(wshort);
+
+
 		}
 	
 	}
+
 }

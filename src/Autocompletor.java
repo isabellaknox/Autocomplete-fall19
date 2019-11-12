@@ -26,10 +26,11 @@ public interface Autocompletor {
 	 * Create internal state needed to store Term objects
 	 * from the parameters. Should be called in implementing
 	 * constructors
-	 * @param terms is array of Strings for words in each Term
-	 * @param weights is corresponding weight for word in terms
-	 */
-	public void initialize(String[] terms, double[] weights);
+     * @param terms is array of Strings for words in each Term
+     * @param weights is corresponding weight for word in terms
+     * @return
+     */
+	public int initialize(String[] terms, double[] weights);
 	
 	/**
 	 * Return size in bytes of all Strings and doubles

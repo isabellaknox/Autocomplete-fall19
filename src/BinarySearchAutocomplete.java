@@ -105,18 +105,39 @@ public class BinarySearchAutocomplete implements Autocompletor {
 		int first = firstIndexOf(myTerms, dummy, comp);
 		int last = lastIndexOf(myTerms, dummy, comp);
 
+
+		if (prefix == null){			// prefix null
+			throw new NullPointerException("Prefix is null");
+		}
 		if (first == -1) {               // prefix not found
 			return new ArrayList<>();
 		}
 
-		// write code here
+		// maintain pq of size k
+		PriorityQueue<Term> pq =
+				new PriorityQueue<Term>(Comparator.comparing(Term::getWeight));
+		for (Term t : myTerms) {
+			if (!t.getWord().startsWith(prefix))
+				continue;
+			if (pq.size() < k) {
+				pq.add(t);
+			} else if (pq.peek().getWeight() < t.getWeight()) {
+				pq.remove();
+				pq.add(t);
+			}
+		}
+		int numResults = Math.min(k, pq.size());
+		LinkedList<Term> ret = new LinkedList<>();
+		for (int i = 0; i < numResults; i++) {
+			ret.addFirst(pq.remove());
+		}
+		return ret;
 
-		return null;
 	
 	}
 
 	@Override
-	public void initialize(String[] terms, double[] weights) {
+	public int initialize(String[] terms, double[] weights) {
 		myTerms = new Term[terms.length];
 		
 		for (int i = 0; i < terms.length; i++) {
@@ -124,6 +145,7 @@ public class BinarySearchAutocomplete implements Autocompletor {
 		}
 		
 		Arrays.sort(myTerms);
+		return 0;
 	}
 	
 	@Override
