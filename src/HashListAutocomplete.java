@@ -19,9 +19,10 @@ public class HashListAutocomplete implements Autocompletor {
 
     /**
      * Create immutable instance with terms constructed from parameter
-     * @param terms words such that terms[k] is part of a word pair 0 <= k < terms.length
+     *
+     * @param terms   words such that terms[k] is part of a word pair 0 <= k < terms.length
      * @param weights weights such that weights[k] corresponds to terms[k]
-     * @throws NullPointerException if either parameter is null
+     * @throws NullPointerException     if either parameter is null
      * @throws IllegalArgumentException if terms.length != weights.length
      * @throws IllegalArgumentException if any elements of weights is negative
      * @throws IllegalArgumentException if any elements of terms is duplicate
@@ -35,7 +36,7 @@ public class HashListAutocomplete implements Autocompletor {
         if (terms.length != weights.length) {
             throw new IllegalArgumentException("terms and weights are not the same length");
         }
-        initialize(terms,weights);
+        initialize(terms, weights);
     }
 
 
@@ -52,19 +53,23 @@ public class HashListAutocomplete implements Autocompletor {
 
     @Override
     public int initialize(String[] terms, double[] weights) {
-       return 0;
+        return 0;
 
     }
 
     @Override
     public int sizeInBytes() {
         if (mySize == 0) {
-
-            for(Term t : myTerms) {
-                mySize += BYTES_PER_DOUBLE +
-                        BYTES_PER_CHAR*t.getWord().length();
+            for (String m : myMap.keySet()) {
+                mySize += BYTES_PER_CHAR * m.length();
+                List<Term> term = myMap.get(m);
+                for (Term t : myTerms) {
+                    mySize += BYTES_PER_DOUBLE +
+                            BYTES_PER_CHAR * t.getWord().length();
+                }
             }
         }
+
         return mySize;
+        }
     }
-}
