@@ -52,10 +52,22 @@ public class HashListAutocomplete implements Autocompletor {
     }
 
     @Override
-    public int initialize(String[] terms, double[] weights) {
-        return 0;
-
+    public void initialize(String[] terms, double[] weights) {
+        myMap = new HashMap<String, List<Term>>();
+        for (int i = 0; i < terms.length; i++) { // terms
+            for (int j = 0; j < Math.min(terms[i].length(), MAX_PREFIX) + 1; j++) { // characters in each term
+                String prefixx = terms[i].substring(0, j);
+                Term curr = new Term(terms[i], weights[i]);
+                myMap.putIfAbsent(prefixx, new ArrayList<>()); //add to map
+                myMap.get(prefixx).add(curr); // assign values to curr
+            }
+        }
+        for (String n : myMap.keySet()) {
+            Collections.sort(myMap.get(n), Comparator.comparing(Term::getWeight).reversed()); // sort every value in map
+        }
     }
+
+
 
     @Override
     public int sizeInBytes() {
