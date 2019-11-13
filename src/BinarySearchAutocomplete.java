@@ -112,8 +112,8 @@ public class BinarySearchAutocomplete implements Autocompletor {
 		if (first == -1) {               // prefix not found
 			return new ArrayList<>();
 		}
-		if (k == 0) {
-			throw new NullPointerException("k is 0");
+		if (k == 0) {			// when k is 0
+			return new ArrayList<>();
 		}
 
 		// maintain pq of size k

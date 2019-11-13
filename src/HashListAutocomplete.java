@@ -41,13 +41,13 @@ public class HashListAutocomplete implements Autocompletor {
 
     @Override
     public List<Term> topMatches(String prefix, int k) {
+        if (myMap.containsKey(prefix)) { //check for key in map
+            List<Term> all = myMap.get(prefix);
+            List<Term> list = all.subList(0, Mathmin(k, all.size()));
+            return list;
+        }
 
-        List<Term> all = myMap.get(prefix);
-        List<Term> list = all.subList(0, Mathmin(k, all.size()));
-
-
-
-        return null;
+        return new ArrayList<Term>(); //if key not in map
     }
 
     @Override
