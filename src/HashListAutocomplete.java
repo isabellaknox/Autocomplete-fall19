@@ -11,8 +11,11 @@ import java.util.*;
  */
 public class HashListAutocomplete implements Autocompletor {
 
+    private static final int MAX_PREFIX = 10;
+    private Map<String, List<Term>> myMap;
     private Term[] myTerms;
     private int mySize;
+
 
     /**
      * Create immutable instance with terms constructed from parameter
@@ -38,6 +41,12 @@ public class HashListAutocomplete implements Autocompletor {
 
     @Override
     public List<Term> topMatches(String prefix, int k) {
+
+        List<Term> all = myMap.get(prefix);
+        List<Term> list = all.subList(0, Mathmin(k, all.size()));
+
+
+
         return null;
     }
 
